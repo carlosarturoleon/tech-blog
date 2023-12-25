@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from BlogEngine import views
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('contact/', views.contact, name='contact'),
+    path('topics-detail/', views.topics_detail, name='topics_detail'),
+    path('topics-listing/', views.topics_listing, name='topics_listing'),
 ]
