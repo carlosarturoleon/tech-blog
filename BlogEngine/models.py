@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    live = models.BooleanField(default=False) # Controls visibility of the blog post
     description = models.TextField(blank=True)  # Optional description field
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)  # Image field
     content = models.TextField()

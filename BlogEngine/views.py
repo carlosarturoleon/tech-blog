@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import BlogPost
 
 def index(request):
     print("Rendering index.html")
@@ -12,3 +13,7 @@ def topics_detail(request):
 
 def topics_listing(request):
     return render(request, 'topics-listing.html')
+
+def blog_list(request):
+    posts = BlogPost.objects.filter(live=True)
+    return render(request, 'blog-list.html', {'posts': posts})
