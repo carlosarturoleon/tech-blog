@@ -25,7 +25,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('topics-detail/', views.topics_detail, name='topics_detail'),
     path('topics-listing/', views.topics_listing, name='topics_listing'),
-    path('blog-list/', views.blog_list, name='blog_list'),
+    path('post/<slug:slug>/', views.post_detail, name='post_detail'),
+    path('post/', views.posts_listing, name='post'),
     path('admin/', admin.site.urls),
 ]
 

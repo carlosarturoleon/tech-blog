@@ -14,7 +14,10 @@
                 <ul>
                     {% for post in posts %}
                         {% if post.live %}
-                            <li>{{ post.title }}</li> 
+                        <li>
+                            <a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a> - 
+                            <small>Posted on {{ post.created_at|date:"Y-m-d" }}</small>
+                        </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
