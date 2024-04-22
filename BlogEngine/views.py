@@ -15,7 +15,7 @@ def topics_listing(request):
     return render(request, 'topics-listing.html')
 
 def posts_listing(request):
-    posts = BlogPost.objects.filter(live=True)
+    posts = BlogPost.objects.filter(live=True).order_by('-updated_at')
     return render(request, 'posts-list.html', {'posts': posts})
 
 def post_detail(request, slug):
