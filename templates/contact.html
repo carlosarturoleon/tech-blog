@@ -16,6 +16,14 @@
       </div>
 
       <div class="col-lg-6 col-12">
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mt-3">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
         <form method="post" novalidate class="custom-form contact-form">
           <div class="row">
             {% csrf_token %}
