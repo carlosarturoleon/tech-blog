@@ -1,11 +1,22 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogPost
+from .forms import ContactForm 
 
 def index(request):
     print("Rendering index.html")
     return render(request, 'index.html')
 
 def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Here, you would typically handle the validated data.
+            # For example, send an email, save the data to a database, etc.
+            # After processing the data, redirect to a new URL:
+            return redirect('thank_you')  # Redirect to a 'thank you' page, for instance.
+    else:
+        form = ContactForm()  # An unbound form for GET requests
+
     post = 'Contact Form'
     breadcrumbs = [
         ('index', 'Homepage'),
@@ -13,6 +24,7 @@ def contact(request):
     ]
 
     context = {
+        'form': form,
         'post': post,
         'breadcrumbs': breadcrumbs
     }
