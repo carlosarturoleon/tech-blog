@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost
+from .models import BlogPost, Contact
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
@@ -25,3 +25,5 @@ class BlogPostAdmin(admin.ModelAdmin):
         }),
     )
     readonly_fields = ('created_at', 'updated_at')
+
+admin.site.register(Contact)

@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogPost
 from .forms import ContactForm 
 from django.contrib import messages
+from .models import Contact
+
 
 def index(request):
     print("Rendering index.html")
@@ -11,12 +13,18 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            # Here, you would typically handle the validated data.
-            # For example, send an email, save the data to a database, etc.
-            # After processing the data, redirect to a new URL:
+            contact = Contact(
+                name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'],
+                subject=form.cleaned_data['subject'],
+                message=form.cleaned_data['message']
+            )
+            contact.save()
             messages.success(request, 'Your message has been sent successfully!')
-
-            return redirect('contact')  # Redirect to a 'thank you' page, for instance.
+            return redirect('contact')  
+        else:
+            print("Form is not valid")
+            print(form.errors)
     else:
         form = ContactForm()  # An unbound form for GET requests
 
