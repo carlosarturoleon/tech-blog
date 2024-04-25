@@ -16,19 +16,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-lg-5 me-lg-auto">
                 <li class="nav-item">
-                    <a class="nav-link click-scroll" href="{% url 'index' %}">Home</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link click-scroll" href="{% url 'post' %}">Posts</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'post' %}active{% endif %}" href="{% url 'post' %}">Posts</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link click-scroll" href="#section_3">Glossary</a>
+                    <a class="nav-link {% if request.path == '/section_3/' %}active{% endif %}" href="#section_3">Glossary</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link click-scroll" href="{% url 'contact' %}">Contact</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
                 </li>
 
                 <li class="nav-item dropdown">
