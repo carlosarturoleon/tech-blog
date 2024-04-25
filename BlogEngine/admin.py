@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost, Contact
+from .models import BlogPost, Contact, Category
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
@@ -27,3 +27,14 @@ class BlogPostAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
 
 admin.site.register(Contact)
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'blog_count_display', 'description')
+
+    def blog_count_display(self, obj):
+        # This method is used to display the count of blog posts in the admin.
+        return obj.posts.count()
+    blog_count_display.short_description = 'Number of Posts'
+
+# Register your models here.
+admin.site.register(Category, CategoryAdmin)

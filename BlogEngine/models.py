@@ -29,6 +29,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    @property
+    def blog_count(self):
+        # This uses the related_name 'posts' specified in the BlogPost model.
+        return self.posts.count()
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)

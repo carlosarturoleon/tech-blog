@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogPost
 from .forms import ContactForm 
 from django.contrib import messages
-from .models import Contact
+from .models import Contact, Category
 
 
 def index(request):
@@ -87,4 +87,3 @@ def post_detail(request, slug):
         'breadcrumbs': breadcrumbs  # Include the breadcrumbs in the context
     }
     return render(request, 'post-detail.html', context)
-
