@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Blog Post{% endblock title %}
+
+{% block content %}
+
+{% include '_section_header.html' %}
+
+<section class="topics-detail-section section-padding" id="topics-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 m-auto">
+                <h1>Glossary List</h1>
+                <ul>
+                    {% for item in glossary %}
+                    <li>
+                        <a href="{% url 'glossary_detail' id=item.id %}">{{ item.term }}</a>
+                        <p>{{ item.description|safe }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>                
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

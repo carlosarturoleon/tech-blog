@@ -24,7 +24,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/section_3/' %}active{% endif %}" href="#section_3">Glossary</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'glossary_listing' %}active{% endif %}" href="{% url 'glossary_listing'%}">Glossary</a>
                 </li>
 
                 <li class="nav-item">

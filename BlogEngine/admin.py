@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost, Contact, Category
+from .models import BlogPost, Contact, Category, Glossary
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
@@ -38,3 +38,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Category, CategoryAdmin)
+
+class GlossaryAdmin(admin.ModelAdmin):
+    list_display = ('term', 'slug', 'definition', 'description')  # Fields to display in the list view
+    search_fields = ['term', 'definition']  # Fields to be searched
+    prepopulated_fields = {'slug': ('term',)}  # Automatically fill in the slug from the term
+
+admin.site.register(Glossary, GlossaryAdmin)
+

@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import BlogPost
+from .models import BlogPost, Contact, Glossary
 from .forms import ContactForm 
 from django.contrib import messages
-from .models import Contact, Category
 
 
 def index(request):
@@ -87,3 +86,24 @@ def post_detail(request, slug):
         'breadcrumbs': breadcrumbs  # Include the breadcrumbs in the context
     }
     return render(request, 'post-detail.html', context)
+
+
+def glossary_listing(request):
+    glossary = Glossary.objects.all()
+    glossary_breadcrumbs = 'Glossary'
+    breadcrumbs = [
+        ('index', 'Homepage'),
+        ('glossary_listing', 'Glossary')
+    ]
+
+    context = {
+        'glossary': glossary,
+        'post': glossary_breadcrumbs,
+        'breadcrumbs': breadcrumbs
+    }
+    return render(request, 'glossary_list.html', context)
+
+
+def glossary_detail(request, id):
+    glossary_item = get_object_or_404(Glossary, pk=id)
+    return render(request, 'glossary_detail.html', {'glossary_item': glossary_item})

@@ -41,7 +41,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-    
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
@@ -51,5 +50,22 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email}"
+
+
+class Glossary(models.Model):
+    term = models.CharField(max_length=100, unique=True)
+    definition = models.TextField()
+    description = models.TextField(blank=True)
+    slug = models.SlugField(unique=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.term)
+        super(Glossary, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.term
 
 

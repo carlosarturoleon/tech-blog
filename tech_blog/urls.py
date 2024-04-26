@@ -28,6 +28,8 @@ urlpatterns = [
     path('post/<slug:slug>/', views.post_detail, name='post_detail'),
     path('post/', views.posts_listing, name='post'),
     path('admin/', admin.site.urls),
+    path('glossary/', views.glossary_listing, name='glossary_listing'),  
+    path('glossary/<int:id>/', views.glossary_detail, name='glossary_detail'),
 ]
 
 if settings.DEBUG:
