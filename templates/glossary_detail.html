@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{ glossary.term }}{% endblock title %}
+
+{% block content %}
+
+{% include '_section_header.html' %}
+
+<section class="topics-detail-section section-padding" id="topics-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 m-auto">
+                <h1>{{ glossary.term }}</h1>
+                <p class="text-justify">
+                    {{ glossary.definition|safe|linebreaks }}
+                </p>                
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include '_subscribe.html' %}
+
+{% endblock content %}

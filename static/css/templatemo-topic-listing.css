@@ -1153,3 +1153,11 @@ blockquote {
   }
 }
 
+/*---------------------------------------
+  POST CONTENT               
+-----------------------------------------*/
+
+.content .text-justify {
+  text-align: justify;
+}
+

@@ -89,7 +89,7 @@ def post_detail(request, slug):
 
 
 def glossary_listing(request):
-    glossary = Glossary.objects.all()
+    glossary = Glossary.objects.order_by('term')
     glossary_breadcrumbs = 'Glossary'
     breadcrumbs = [
         ('index', 'Homepage'),
@@ -104,6 +104,17 @@ def glossary_listing(request):
     return render(request, 'glossary_list.html', context)
 
 
-def glossary_detail(request, id):
-    glossary_item = get_object_or_404(Glossary, pk=id)
-    return render(request, 'glossary_detail.html', {'glossary_item': glossary_item})
+def glossary_detail(request, slug):
+    glossary_item = get_object_or_404(Glossary, slug=slug)
+    breadcrumbs = [
+        ('index', 'Homepage'),  # Static homepage breadcrumb
+        ('glossary_listing', 'Glossary'),
+        ('glossary_detail', glossary_item.term)  # Dynamic breadcrumb based on the post's title
+    ]
+
+    context = {
+        'glossary': glossary_item,
+        'post': glossary_item.term,
+        'breadcrumbs': breadcrumbs 
+    }
+    return render(request, 'glossary_detail.html', context)

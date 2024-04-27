@@ -29,7 +29,7 @@ urlpatterns = [
     path('post/', views.posts_listing, name='post'),
     path('admin/', admin.site.urls),
     path('glossary/', views.glossary_listing, name='glossary_listing'),  
-    path('glossary/<int:id>/', views.glossary_detail, name='glossary_detail'),
+    path('glossary/<slug:slug>/', views.glossary_detail, name='glossary_detail'),
 ]
 
 if settings.DEBUG:

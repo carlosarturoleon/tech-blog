@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Blog Post{% endblock title %}
+{% block title %}Glossary{% endblock title %}
 
 {% block content %}
 
@@ -16,7 +16,7 @@
                 <ul>
                     {% for item in glossary %}
                     <li>
-                        <a href="{% url 'glossary_detail' id=item.id %}">{{ item.term }}</a>
+                        <a href="{% url 'glossary_detail' slug=item.slug %}">{{ item.term }}</a>
                         <p>{{ item.description|safe }}</p>
                     </li>
                     {% endfor %}
