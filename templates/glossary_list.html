@@ -11,15 +11,35 @@
 <section class="topics-detail-section section-padding" id="topics-detail">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-12 m-auto">
-                <h1>Glossary List</h1>
-                <ul>
-                    {% for item in glossary %}
-                    <li>
-                        <a href="{% url 'glossary_detail' slug=item.slug %}">{{ item.term }}</a>
-                        <p>{{ item.description|safe }}</p>
-                    </li>
+            <div class="col-12 mb-4"> 
+                <div class="alphabet-navbar d-flex justify-content-center flex-wrap">
+                    {% for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+                        <a href="#{{ letter }}" class="mx-2 text-decoration-none font-weight-bold text-dark">{{ letter }}</a>
                     {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-2 col-12">
+                <ul>
+                    {% for letter, items in glossary.items %}
+                        {% for item in items %}
+                            <li><a href="{% url 'glossary_detail' slug=item.slug %}">{{ item.term }}</a></li>
+                        {% endfor %}    
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-8 col-12 m-auto">
+                <ul>
+                    {% for letter, items in glossary.items %}
+                    <h2 id="{{ letter }}" class="visually-hidden">{{ letter }}</h2>
+                    <ul>
+                        {% for item in items %}
+                            <li>
+                                <a href="{% url 'glossary_detail' slug=item.slug %}">{{ item.term }}</a>
+                                <p>{{ item.description|safe }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
                 </ul>                
             </div>
         </div>

@@ -90,6 +90,13 @@ def post_detail(request, slug):
 
 def glossary_listing(request):
     glossary = Glossary.objects.order_by('term')
+    glossary_by_letter = {}
+    for item in glossary:
+        first_letter = item.term[0].upper() 
+        if first_letter not in glossary_by_letter:
+            glossary_by_letter[first_letter] = []
+        glossary_by_letter[first_letter].append(item)
+        
     glossary_breadcrumbs = 'Glossary'
     breadcrumbs = [
         ('index', 'Homepage'),
@@ -97,7 +104,7 @@ def glossary_listing(request):
     ]
 
     context = {
-        'glossary': glossary,
+        'glossary': glossary_by_letter,
         'post': glossary_breadcrumbs,
         'breadcrumbs': breadcrumbs
     }
