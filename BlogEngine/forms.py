@@ -1,4 +1,5 @@
 from django import forms
+from .models import Subscriber
 
 class ContactForm(forms.Form):
     name = forms.CharField(
@@ -35,3 +36,16 @@ class ContactForm(forms.Form):
             'required': 'required'
         })
     )
+
+class SubscriptionForm(forms.ModelForm):
+    class Meta:
+        model = Subscriber
+        fields = ['email']
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Email Address',
+                'required': 'required',
+                'id': 'subscribe-email'
+            })
+        }

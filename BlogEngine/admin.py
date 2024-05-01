@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost, Contact, Category, Glossary
+from .models import BlogPost, Contact, Category, Glossary, Subscriber
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
@@ -45,4 +45,11 @@ class GlossaryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('term',)}  # Automatically fill in the slug from the term
 
 admin.site.register(Glossary, GlossaryAdmin)
+
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'date_subscribed', 'date_end_subscription', 'confirmed')
+    list_filter = ('date_subscribed', 'date_end_subscription', 'confirmed')
+    search_fields = ('email',)
+
+admin.site.register(Subscriber, SubscriberAdmin)
 

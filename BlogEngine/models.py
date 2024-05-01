@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.utils.timezone import now
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
@@ -68,4 +69,12 @@ class Glossary(models.Model):
     def __str__(self):
         return self.term
 
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True)
+    date_subscribed = models.DateTimeField(default=now, editable=False)
+    date_end_subscription = models.DateTimeField(null=True, blank=True)
+    confirmed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.email
 

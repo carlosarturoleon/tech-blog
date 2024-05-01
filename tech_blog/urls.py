@@ -30,6 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('glossary/', views.glossary_listing, name='glossary_listing'),  
     path('glossary/<slug:slug>/', views.glossary_detail, name='glossary_detail'),
+    path('subscribe/', views.subscribe, name='subscribe'),
 ]
 
 if settings.DEBUG:

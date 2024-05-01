@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogPost, Contact, Glossary
-from .forms import ContactForm 
+from .forms import ContactForm, SubscriptionForm 
 from django.contrib import messages
 
 
@@ -73,6 +73,7 @@ def posts_listing(request):
 
 def post_detail(request, slug):
     post = get_object_or_404(BlogPost, slug=slug, live=True)  # Ensure the post is live
+    form = SubscriptionForm(request.POST)
 
     # Dynamic breadcrumbs setup
     breadcrumbs = [
@@ -82,6 +83,7 @@ def post_detail(request, slug):
     ]
 
     context = {
+        'form': form,
         'post': post,
         'breadcrumbs': breadcrumbs  # Include the breadcrumbs in the context
     }
@@ -113,6 +115,7 @@ def glossary_listing(request):
 
 def glossary_detail(request, slug):
     glossary_item = get_object_or_404(Glossary, slug=slug)
+    form = SubscriptionForm(request.POST)
     breadcrumbs = [
         ('index', 'Homepage'),  # Static homepage breadcrumb
         ('glossary_listing', 'Glossary'),
@@ -120,8 +123,25 @@ def glossary_detail(request, slug):
     ]
 
     context = {
+        'form': form,
         'glossary': glossary_item,
         'post': glossary_item.term,
         'breadcrumbs': breadcrumbs 
     }
     return render(request, 'glossary_detail.html', context)
+
+
+def subscribe(request):
+    if request.method == 'POST':
+        form = SubscriptionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your request has been received.')
+            return redirect(f"{request.META.get('HTTP_REFERER', '/')}#subscribe-section")
+        else:
+            for error in form.errors.values():
+                messages.error(request, error.as_text())
+    else:
+        form = SubscriptionForm()
+
+    return redirect(f"{request.META.get('HTTP_REFERER', '/')}#subscribe-section")

@@ -10,11 +10,17 @@
             </div>
 
             <div class="col-lg-5 col-12 subscribe-form-wrap d-flex justify-content-center align-items-center">
-                <form class="custom-form subscribe-form" action="#" method="post" role="form">
+                <form class="custom-form subscribe-form" action="{% url 'subscribe' %}" method="post" role="form" id="subscribe-section">
                     <h4 class="mb-4 pb-2">Get Newsletter</h4>
 
-                    <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                        class="form-control" placeholder="Email Address" required="">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% csrf_token %}
+                    {{ form.email }}
 
                     <div class="col-lg-12 col-12">
                         <button type="submit" class="form-control">Subscribe</button>
