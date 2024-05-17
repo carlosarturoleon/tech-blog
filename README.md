@@ -43,4 +43,4 @@ Tech Blog is a simple, lightweight blogging platform built with Django. It allow
 Contributions to the Tech Blog are welcome. Please feel free to fork the repository, make changes, and submit pull requests.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
