@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogPost, Contact, Category, Glossary, Subscriber
+from .models import BlogPost, Contact, Category, Glossary, Subscriber, Tag
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
@@ -53,3 +53,5 @@ class SubscriberAdmin(admin.ModelAdmin):
 
 admin.site.register(Subscriber, SubscriberAdmin)
 
+# Register the Tag model
+admin.site.register(Tag)
