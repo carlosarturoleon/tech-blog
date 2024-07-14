@@ -18,7 +18,7 @@
                 {% endif %}
                 <p><strong>Description:</strong> {{ post.description }}</p>
                 <p>Posted by {{ post.author.username }} on {{ post.created_at|date:"Y-m-d" }}</p>
-                <div>{{ post.content|linebreaks }}</div>
+                <div>{{ post.content|safe|linebreaks }}</div>
             </div>
         </div>
     </div>
