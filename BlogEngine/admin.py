@@ -30,6 +30,7 @@ admin.site.register(Contact)
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'blog_count_display', 'description')
+    ordering = ('name',)  # Order categories alphabetically by name
 
     def blog_count_display(self, obj):
         # This method is used to display the count of blog posts in the admin.
@@ -38,6 +39,12 @@ class CategoryAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Category, CategoryAdmin)
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    ordering = ('name',)  # Order tags alphabetically by name
+
+admin.site.register(Tag, TagAdmin)
 
 class GlossaryAdmin(admin.ModelAdmin):
     list_display = ('term', 'slug', 'definition', 'description')  # Fields to display in the list view
@@ -52,6 +59,3 @@ class SubscriberAdmin(admin.ModelAdmin):
     search_fields = ('email',)
 
 admin.site.register(Subscriber, SubscriberAdmin)
-
-# Register the Tag model
-admin.site.register(Tag)
